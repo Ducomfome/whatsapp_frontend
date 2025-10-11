@@ -1,0 +1,65 @@
+/* client/src/components/MessageInput.css */
+
+.message-input {
+  background-color: #f0f2f5; /* Um cinza claro, padrão do WhatsApp */
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1px solid #ddd; /* Uma linha sutil de separação */
+}
+
+.message-input input {
+  flex-grow: 1; /* Faz o campo de texto ocupar o máximo de espaço */
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 15px;
+}
+
+/* Remove a borda azul padrão que aparece ao clicar no input */
+.message-input input:focus {
+  outline: none;
+}
+
+.message-input button {
+  background-color: #005E54; /* Mesmo verde do cabeçalho */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Deixa o botão perfeitamente redondo */
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s; /* Efeito suave ao passar o mouse */
+}
+
+.message-input button:hover {
+    background-color: #007A6E; /* Um tom de verde um pouco mais claro */
+}
+.button-options-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #f0f2f5;
+}
+
+.choice-button {
+  background-color: #fff;
+  border: 1px solid #005E54;
+  color: #005E54;
+  padding: 12px;
+  border-radius: 25px;
+  text-align: center;
+  margin: 5px 0;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.2s;
+}
+
+.choice-button:hover {
+  background-color: #e0f2f1;
+}

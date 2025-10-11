@@ -1,0 +1,61 @@
+/* client/src/components/PaymentPage.css */
+
+.payment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+  font-family: sans-serif;
+}
+
+.payment-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.payment-box h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.qr-code {
+  max-width: 250px;
+  width: 100%;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.copia-e-cola-box {
+  display: flex;
+  margin-top: 10px;
+}
+
+.copia-e-cola-box input {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px 0 0 4px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+.copia-e-cola-box button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  font-weight: bold;
+}
+
+.copia-e-cola-box button:hover {
+  background-color: #0056b3;
+}

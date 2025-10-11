@@ -1,0 +1,52 @@
+/* client/src.css - VERSÃO CENTRALIZADA E RESPONSIVA */
+
+/* Fundo da página */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #dadbd3; /* Cor de fundo do WhatsApp Web */
+}
+
+/* Container que centraliza o chat */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* A "tela de celular" do chat */
+.chat-screen {
+  width: 100%;
+  max-width: 450px; /* Largura máxima da janela */
+  height: 95vh;
+  max-height: 800px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- Media Query para Telas Pequenas (Celulares) --- */
+/* Este código só será aplicado se a largura da tela for 600px ou menos */
+@media (max-width: 600px) {
+  /* Remove o fundo cinza e o espaçamento em volta */
+  .app-container {
+    padding: 0;
+  }
+
+  /* Faz a tela do chat ocupar 100% do espaço */
+  .chat-screen {
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

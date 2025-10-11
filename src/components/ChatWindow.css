@@ -1,0 +1,22 @@
+/* client/src/components/ChatWindow.css */
+
+.chat-window {
+  /* Esta é a propriedade mais importante! */
+  /* Faz esta div "crescer" e ocupar todo o espaço vertical disponível */
+  flex-grow: 1;
+
+  /* Define a imagem de fundo online */
+  background-image: url('https://i.pinimg.com/736x/56/ea/b7/56eab7512f1021bdd4cf04952ad45a2c.jpg');
+
+  /* Garante que a imagem cubra toda a área sem distorcer */
+  background-size: cover;
+
+  /* Centraliza a imagem no fundo */
+  background-position: center;
+
+  /* Adiciona um preenchimento interno para as mensagens não ficarem coladas nas bordas */
+  padding: 20px;
+
+  /* Adiciona a barra de rolagem se o conteúdo for maior que a tela */
+  overflow-y: auto;
+}
