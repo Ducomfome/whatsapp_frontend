@@ -50,3 +50,17 @@ body {
     box-shadow: none;
   }
 }
+@media (max-width: 600px) {
+  .app-container {
+    padding: 0;
+    height: 100vh;
+    height: 100dvh; /* Nova unidade pra mobile */
+  }
+  
+  .chat-screen {
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+  }
+}
