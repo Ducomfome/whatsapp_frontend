@@ -63,3 +63,19 @@
 .choice-button:hover {
   background-color: #e0f2f1;
 }
+/* AJUSTES PARA MOBILE */
+@media (max-width: 768px) {
+  .message-input {
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    position: sticky;
+    bottom: 0;
+    background-color: #f0f2f5;
+  }
+  
+  .button-options-container {
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    position: sticky;
+    bottom: 0;
+    background-color: #f0f2f5;
+  }
+}
