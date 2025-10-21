@@ -2,120 +2,19 @@
 <html lang="pt-br">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="https://i.imgur.com/zjChX9m.png" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Chat privado - Conversa automática"
+      content="WhatsApp Web - Chat automático"
     />
-    <!-- REMOVER TRADUÇÃO -->
-    <meta name="google" content="notranslate" />
-    <meta name="robots" content="notranslate" />
-    
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <!-- CONFIGURAÇÕES PARA VÍDEO AUTOPLAY -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    
-    <title>CHAT PRIVADO 🔥</title>
-
-    <style>
-      /* ESTILOS PARA REMOVER TRADUÇÃO */
-      * {
-        -webkit-translate: no;
-        -moz-translate: no;
-        -ms-translate: no;
-        -o-translate: no;
-        translate: none;
-      }
-      
-      /* FUNDO DE CARREGAMENTO */
-      body {
-        margin: 0;
-        background-color: #dadbd3;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-          sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      
-      /* REMOVER BOTÕES DE TRADUÇÃO NO CHROME */
-      .goog-te-banner-frame {
-        display: none !important;
-      }
-      
-      .goog-te-gadget-simple {
-        display: none !important;
-      }
-      
-      /* OCULTAR ANY ELEMENTO DE TRADUÇÃO */
-      [class*="translate"] {
-        display: none !important;
-      }
-    </style>
+    <title>WhatsApp Web</title>
   </head>
   <body>
-    <!-- REMOVER ELEMENTOS DE TRADUÇÃO DO GOOGLE -->
-    <script>
-      // PREVENIR TRADUÇÃO AUTOMÁTICA
-      document.addEventListener('DOMContentLoaded', function() {
-        document.documentElement.setAttribute('translate', 'no');
-        document.documentElement.setAttribute('lang', 'pt-BR');
-        
-        // REMOVER BOTÃO DE TRADUÇÃO SE EXISTIR
-        const translateElements = document.querySelectorAll('[class*="translate"], [id*="translate"]');
-        translateElements.forEach(el => el.remove());
-        
-        // CONFIGURAR VÍDEO PARA AUTOPLAY COM SOM
-        window.enableVideoAudio = function(videoElement) {
-          if (videoElement) {
-            videoElement.muted = false;
-            videoElement.play().catch(e => console.log('Auto-play bloqueado:', e));
-          }
-        };
-      });
-      
-      // DETECTAR E REMOVER BARRAS DE TRADUÇÃO
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === 1) {
-              if (node.className && (
-                node.className.includes('goog-te') || 
-                node.className.includes('translate') ||
-                node.id && node.id.includes('translate')
-              )) {
-                node.remove();
-              }
-            }
-          });
-        });
-      });
-      
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-    </script>
-    
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    
     <div id="root"></div>
-    
-    <!-- SCRIPT PARA BLOQUEAR TRADUÇÃO -->
-    <script>
-      // BLOQUEAR TRADUÇÃO EM TODOS OS ELEMENTOS
-      document.addEventListener('DOMContentLoaded', function() {
-        const allElements = document.querySelectorAll('*');
-        allElements.forEach(el => {
-          el.setAttribute('translate', 'no');
-        });
-      });
-    </script>
   </body>
 </html>
