@@ -1,76 +1,47 @@
-// client/src/App.js - VERSÃO ORIGINAL
+/* client/src/App.css - SÓ CSS! */
 
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
-import './App.css';
-import Header from './components/Header';
-import ChatWindow from './components/ChatWindow';
-import MessageInput from './components/MessageInput';
-
-const socket = io('https://whatsapp-backend-vott.onrender.com'); 
-
-function App() {
-  const [messages, setMessages] = useState([
-    { id: 0, text: 'Esta é uma conta comercial', sender: 'system' }
-  ]);
-  const [uiSettings, setUiSettings] = useState({ inputEnabled: false, buttons: [] });
-  const [botStatus, setBotStatus] = useState('online');
-
-  useEffect(() => {
-    socket.on('connect', () => {
-      console.log('Conectado ao servidor de socket!', socket.id);
-    });
-    
-    socket.on('botMessage', (message) => {
-      new Audio('/audios/notification.mp3').play().catch(e => {});
-      const newMessage = {
-        id: Date.now() + Math.random(),
-        sender: 'bot',
-        type: message.type,
-        content: message.content,
-      };
-      setMessages(currentMessages => [...currentMessages, newMessage]);
-    });
-
-    socket.on('setUI', (settings) => {
-      setUiSettings(settings);
-    });
-
-    socket.on('botStatus', (data) => setBotStatus(data.status));
-
-    return () => {
-      socket.off('botMessage');
-      socket.off('setUI');
-      socket.off('botStatus');
-      socket.off('connect');
-    };
-  }, []);
-
-  const handleSendMessage = async (data) => {
-    if (data.action === 'REDIRECT' && data.url) {
-      setBotStatus('redirecionando...');
-      window.open(data.url, '_blank');
-      setBotStatus('online');
-      return;
-    }
-    const newMessage = { id: Date.now(), text: data.text, sender: 'me' };
-    setMessages(currentMessages => [...currentMessages, newMessage]);
-    socket.emit('userMessage', data);
-  };
-
-  return (
-    <div className="app-container">
-      <div className="chat-screen">
-        <Header status={botStatus} />
-        <ChatWindow messages={messages} />
-        <MessageInput
-          onSendMessage={handleSendMessage}
-          inputEnabled={uiSettings.inputEnabled}
-          buttons={uiSettings.buttons}
-        />
-      </div>
-    </div>
-  );
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #dadbd3;
 }
 
-export default App;
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.chat-screen {
+  width: 100%;
+  max-width: 450px;
+  height: 95vh;
+  max-height: 800px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .app-container {
+    padding: 0;
+    height: 100vh;
+  }
+
+  .chat-screen {
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
