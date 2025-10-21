@@ -1,8 +1,8 @@
-// client/src/components/PaymentPage.js
+// client/src/components/PaymentPage.js - VERSÃO ORIGINAL
 
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import './PaymentPage.css'; // Vamos criar este arquivo de CSS a seguir
+import './PaymentPage.css';
 
 function PaymentPage() {
   const location = useLocation();
@@ -14,7 +14,7 @@ function PaymentPage() {
     setButtonText('Copiado!');
     setTimeout(() => {
       setButtonText('Copiar Código PIX');
-    }, 2000); // Volta ao texto original depois de 2 segundos
+    }, 2000);
   };
 
   if (!qrCode || !copiaECola) {
