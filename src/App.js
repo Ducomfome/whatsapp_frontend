@@ -1,4 +1,4 @@
-// client/src/App.js - VERSÃO ORIGINAL
+// client/src/App.js - VERSÃO COMPLETA E CORRIGIDA
 
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
@@ -7,7 +7,7 @@ import Header from './components/Header';
 import ChatWindow from './components/ChatWindow';
 import MessageInput from './components/MessageInput';
 
-const socket = io('https://whatsapp-backend-vott.onrender.com'); 
+const socket = io('https://whatsapp-backend-vott.onrender.com');
 
 function App() {
   const [messages, setMessages] = useState([
@@ -16,6 +16,9 @@ function App() {
   const [uiSettings, setUiSettings] = useState({ inputEnabled: false, buttons: [] });
   const [botStatus, setBotStatus] = useState('online');
 
+  // ===================================
+  // HOOK useEffect ATUALIZADO
+  // ===================================
   useEffect(() => {
     socket.on('connect', () => {
       console.log('Conectado ao servidor de socket!', socket.id);
@@ -37,22 +40,34 @@ function App() {
     });
 
     socket.on('botStatus', (data) => setBotStatus(data.status));
+    
+    // AQUI ESTÁ A MUDANÇA: Ouve o comando do servidor para abrir o WhatsApp
+    socket.on('redirectToURL', (data) => {
+      if (data.url) {
+        console.log(`🔗 Redirecionando para: ${data.url}`);
+        setBotStatus('redirecionando...');
+        window.open(data.url, '_blank'); // Abre o link em uma nova aba
+      }
+    });
 
     return () => {
       socket.off('botMessage');
       socket.off('setUI');
       socket.off('botStatus');
       socket.off('connect');
+      socket.off('redirectToURL'); // Limpa o novo ouvinte ao desmontar o componente
     };
   }, []);
 
   const handleSendMessage = async (data) => {
-    if (data.action === 'REDIRECT' && data.url) {
-      setBotStatus('redirecionando...');
-      window.open(data.url, '_blank');
-      setBotStatus('online');
-      return;
-    }
+    // ESTA PARTE DO SEU CÓDIGO ORIGINAL ESTÁ OBSOLETA E FOI REMOVIDA.
+    // A LÓGICA DE REDIRECIONAMENTO AGORA ESTÁ NO useEffect.
+    // if (data.action === 'REDIRECT' && data.url) {
+    //   setBotStatus('redirecionando...');
+    //   window.open(data.url, '_blank');
+    //   setBotStatus('online');
+    //   return;
+    // }
     const newMessage = { id: Date.now(), text: data.text, sender: 'me' };
     setMessages(currentMessages => [...currentMessages, newMessage]);
     socket.emit('userMessage', data);
