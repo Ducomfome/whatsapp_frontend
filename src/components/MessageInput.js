@@ -1,4 +1,4 @@
-// client/src/components/MessageInput.js
+// client/src/components/MessageInput.js - VERSÃO FINAL
 
 import React, { useState } from 'react';
 import './MessageInput.css';
@@ -9,23 +9,26 @@ function MessageInput({ onSendMessage, inputEnabled, buttons }) {
   const handleTextSubmit = (e) => {
     e.preventDefault();
     if (text.trim() !== '') {
-      onSendMessage({ text: text });
+      onSendMessage({ text: text.trim() });
       setText('');
     }
   };
 
-  // Se o backend mandou botões, mostre-os
+  const handleButtonClick = (button) => {
+    onSendMessage({
+      text: button.text,
+      payload: button.payload
+    });
+  };
+
   if (buttons && buttons.length > 0) {
     return (
       <div className="button-options-container">
         {buttons.map((button, index) => (
-          <button 
-            key={index} 
+          <button
+            key={index}
             className="choice-button"
-            // MUDANÇA PRINCIPAL AQUI:
-            // Agora passamos o objeto 'button' inteiro para o App.js.
-            // O App.js vai decidir o que fazer com base na propriedade 'action'.
-            onClick={() => onSendMessage(button)} 
+            onClick={() => handleButtonClick(button)}
           >
             {button.text}
           </button>
@@ -34,7 +37,6 @@ function MessageInput({ onSendMessage, inputEnabled, buttons }) {
     );
   }
 
-  // Se não, mostre a caixa de texto
   return (
     <form className="message-input" onSubmit={handleTextSubmit}>
       <input
