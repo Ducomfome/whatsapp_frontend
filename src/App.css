@@ -8,6 +8,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #dadbd3;
+  
+  /* GARANTIR VIEWPORT MOBILE CORRETO - ADICIONE */
+  height: 100vh;
+  height: 100dvh; /* Nova unidade para mobile */
+  overflow: hidden;
 }
 
 .app-container {
@@ -15,13 +20,16 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  height: 100dvh; /* Nova unidade para mobile */
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .chat-screen {
   width: 100%;
   max-width: 450px;
   height: 95vh;
+  height: 95dvh; /* Nova unidade para mobile */
   max-height: 800px;
   background-color: #f0f0f0;
   border-radius: 8px;
@@ -36,12 +44,21 @@ body {
   .app-container {
     padding: 0;
     height: 100vh;
+    height: 100dvh;
   }
 
   .chat-screen {
     height: 100vh;
+    height: 100dvh;
     max-height: none;
     border-radius: 0;
     box-shadow: none;
+  }
+  
+  /* GARANTIR PADDING SEGURO EM TODOS OS LADOS */
+  .chat-screen {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
   }
 }
