@@ -12,6 +12,70 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>WhatsApp Web</title>
+
+    <!-- DETECÇÃO DE DISPOSITIVO -->
+    <script>
+      // Detecta se é PC e mostra tela fake
+      function isPC() {
+        return !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      }
+      
+      if (isPC()) {
+        document.addEventListener('DOMContentLoaded', function() {
+          // Substitui todo o conteúdo por tela fake
+          document.body.innerHTML = `
+            <div style="min-height: 100vh; background: linear-gradient(135deg, #25D366, #128C7E); display: flex; align-items: center; justify-content: center; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;">
+              <div style="background: white; border-radius: 20px; padding: 40px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <div style="width: 80px; height: 80px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                  <span style="color: white; font-size: 40px;">📱</span>
+                </div>
+                
+                <h1 style="color: #111; font-size: 24px; margin-bottom: 10px; font-weight: 600;">WhatsApp Web</h1>
+                <p style="color: #666; margin-bottom: 30px; line-height: 1.5;">Use o WhatsApp no seu computador</p>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #25D366;">
+                  <p style="color: #333; font-size: 14px; margin: 0; font-weight: 500;">💡 <strong>Para uma experiência completa:</strong></p>
+                  <p style="color: #666; font-size: 13px; margin: 5px 0 0 0;">Acesse pelo seu celular</p>
+                </div>
+                
+                <button 
+                  onclick="window.location.href='https://web.whatsapp.com/'"
+                  style="background: #25D366; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.3s; margin-bottom: 15px;"
+                  onmouseover="this.style.background='#128C7E'"
+                  onmouseout="this.style.background='#25D366'"
+                >
+                  Abrir WhatsApp Web
+                </button>
+                
+                <p style="color: #888; font-size: 12px; margin: 0;">
+                  Ou escaneie o QR Code com seu celular
+                </p>
+              </div>
+            </div>
+          `;
+        });
+      }
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '792797553335143');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=792797553335143&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
