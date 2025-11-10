@@ -1,4 +1,4 @@
-// client/src/App.js - VERSÃO COMPLETA E CORRIGIDA
+// client/src/App.js - VERSÃO COM LEAD + INITIATECHECKOUT PARA PAGAMENTO
 
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
@@ -15,10 +15,8 @@ function App() {
   ]);
   const [uiSettings, setUiSettings] = useState({ inputEnabled: false, buttons: [] });
   const [botStatus, setBotStatus] = useState('online');
+  const [leadTracked, setLeadTracked] = useState(false);
 
-  // ===================================
-  // HOOK useEffect ATUALIZADO
-  // ===================================
   useEffect(() => {
     socket.on('connect', () => {
       console.log('Conectado ao servidor de socket!', socket.id);
@@ -33,6 +31,13 @@ function App() {
         content: message.content,
       };
       setMessages(currentMessages => [...currentMessages, newMessage]);
+
+      // ✅ LEAD - Primeira mensagem do bot
+      if (!leadTracked && window.fbq) {
+        window.fbq('track', 'Lead');
+        setLeadTracked(true);
+        console.log('✅ Lead marcado - Primeira mensagem do bot');
+      }
     });
 
     socket.on('setUI', (settings) => {
@@ -41,12 +46,18 @@ function App() {
 
     socket.on('botStatus', (data) => setBotStatus(data.status));
     
-    // AQUI ESTÁ A MUDANÇA: Ouve o comando do servidor para abrir o WhatsApp
     socket.on('redirectToURL', (data) => {
       if (data.url) {
         console.log(`🔗 Redirecionando para: ${data.url}`);
         setBotStatus('redirecionando...');
-        window.open(data.url, '_blank'); // Abre o link em uma nova aba
+        
+        // ✅ INITIATECHECKOUT - Quando vai para o site de pagamento
+        if (window.fbq) {
+          window.fbq('track', 'InitiateCheckout');
+          console.log('✅ InitiateCheckout marcado - Indo para pagamento');
+        }
+        
+        window.open(data.url, '_blank');
       }
     });
 
@@ -55,19 +66,12 @@ function App() {
       socket.off('setUI');
       socket.off('botStatus');
       socket.off('connect');
-      socket.off('redirectToURL'); // Limpa o novo ouvinte ao desmontar o componente
+      socket.off('redirectToURL');
     };
-  }, []);
+  }, [leadTracked]);
 
   const handleSendMessage = async (data) => {
-    // ESTA PARTE DO SEU CÓDIGO ORIGINAL ESTÁ OBSOLETA E FOI REMOVIDA.
-    // A LÓGICA DE REDIRECIONAMENTO AGORA ESTÁ NO useEffect.
-    // if (data.action === 'REDIRECT' && data.url) {
-    //   setBotStatus('redirecionando...');
-    //   window.open(data.url, '_blank');
-    //   setBotStatus('online');
-    //   return;
-    // }
+    // Apenas envia mensagem normal
     const newMessage = { id: Date.now(), text: data.text, sender: 'me' };
     setMessages(currentMessages => [...currentMessages, newMessage]);
     socket.emit('userMessage', data);
