@@ -1,0 +1,40 @@
+/* src/components/VslPlayer.css */
+
+/* 1. O Container (segura tudo e define o tamanho) */
+.vsl-container {
+  position: relative; /* Base para o overlay */
+  width: 100%;
+  max-width: 800px; /* Defina o tamanho que quiser */
+  margin: auto;
+  aspect-ratio: 16/9; /* Proporção do vídeo (16:9) */
+  background-color: #000;
+}
+
+/* 2. O Vídeo (ocupa 100% do container) */
+.vsl-video {
+  width: 100%;
+  height: 100%;
+}
+
+/* 3. O Overlay "Clique para Desmutar" */
+.vsl-unmute-overlay {
+  position: absolute; /* Fica por cima do vídeo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Escurece um pouco */
+  cursor: pointer;
+  z-index: 10; /* Garante que está na frente */
+
+  /* Centraliza a imagem/GIF de "play" */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 4. A Imagem/GIF de "Play" */
+.vsl-unmute-overlay img {
+  width: 150px; /* Tamanho do seu GIF */
+  max-width: 80%;
+}
